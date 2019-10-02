@@ -23,7 +23,7 @@ namespace GrandeHotelApi.Controllers.api
         [HttpPost(Name = nameof(CreateRoom))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> CreateRoom(RoomPostModel data)
+        public async Task<ActionResult> CreateRoom([FromBody]RoomPostModel data)
         {
             Rooms room = MappingService.ToRooms(data);
             using(var unitOfWork = new UnitOfWork(_context))

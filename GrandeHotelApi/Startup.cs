@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSwag.Generation.Processors.Security;
 
 namespace GrandeHotelApi
 {
@@ -31,6 +32,30 @@ namespace GrandeHotelApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString("grande_hotel"));
             });
+
+            services.AddSwaggerDocument(options =>
+            {
+                options.Title = "Grande Hotel Api";
+                options.Description = "Manage reservations at the Grande Hotel, London, UK";
+
+                // TODO: Re-add when we implement auth/auth
+                //options.AddSecurity("bearer", new string[0], new NSwag.OpenApiSecurityScheme
+                //{
+                //    Type = NSwag.OpenApiSecuritySchemeType.OAuth2,
+                //    Description = "Copy 'Bearer ' + valid token (retrieved by using \"/token\" entrypoint) into the field",
+                //    Flow = NSwag.OpenApiOAuth2Flow.Password,
+                //    Flows = new NSwag.OpenApiOAuthFlows
+                //    {
+                //        Password = new NSwag.OpenApiOAuthFlow
+                //        {
+                //            TokenUrl = "https://localhost:44350/token"
+                //        }
+                //    }
+                //});
+
+                //options.OperationProcessors.Add(new OperationSecurityScopeProcessor("bearer"));
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -47,7 +72,8 @@ namespace GrandeHotelApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseMvc();
         }
     }

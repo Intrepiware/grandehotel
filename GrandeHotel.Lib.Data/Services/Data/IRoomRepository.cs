@@ -2,7 +2,7 @@
 
 namespace GrandeHotel.Lib.Data.Services.Data
 {
-    public interface IRoomsRepository : IRepository<Rooms>
+    public interface IRoomRepository : IRepository<Room>
     {
 
     }

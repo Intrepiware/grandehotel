@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace GrandeHotel.Lib.Data.Models
 {
-    public partial class Rooms
+    public partial class Room
     {
-        public Rooms()
+        public Room()
         {
-            Bookings = new HashSet<Bookings>();
+            Booking = new HashSet<Booking>();
         }
 
         public Guid RoomId { get; set; }
         public string Name { get; set; }
         public decimal NightlyRate { get; set; }
 
-        public virtual ICollection<Bookings> Bookings { get; set; }
+        public virtual ICollection<Booking> Booking { get; set; }
     }
 }

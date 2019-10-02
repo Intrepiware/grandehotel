@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace GrandeHotel.Lib.Data.Services.Data.Impl
 {
-    public class BookingsRepository : Repository<Bookings>, IBookingsRepository
+    public class BookingsRepository : Repository<Booking>, IBookingRepository
     {
         public BookingsRepository(Microsoft.EntityFrameworkCore.DbContext context) : base(context)
         {
         }
 
-        public IEnumerable<Bookings> GetAvailableRooms()
+        public IEnumerable<Booking> GetAvailableRooms()
         {
             throw new NotImplementedException();
         }

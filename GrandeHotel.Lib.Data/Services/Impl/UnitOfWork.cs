@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GrandeHotel.Lib.Data.Models;
 using GrandeHotel.Lib.Data.Services.Data;
 using GrandeHotel.Lib.Data.Services.Data.Impl;
+using System.Threading.Tasks;
 
 namespace GrandeHotel.Lib.Data.Services.Impl
 {
@@ -18,9 +16,9 @@ namespace GrandeHotel.Lib.Data.Services.Impl
             Bookings = new BookingsRepository(context);
         }
 
-        public IRoomsRepository Rooms { get; private set; }
+        public IRoomRepository Rooms { get; private set; }
 
-        public IBookingsRepository Bookings { get; private set; }
+        public IBookingRepository Bookings { get; private set; }
 
         public async Task<int> Complete()
         {

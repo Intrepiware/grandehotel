@@ -9,16 +9,16 @@ namespace GrandeHotelApi.Services
 {
     public static class MappingService
     {
-        public static Rooms ToRooms(RoomPostModel data)
+        public static Room ToRoom(RoomPostModel data)
         {
-            return new Rooms()
+            return new Room()
             {
                 Name = data.Name,
                 NightlyRate = data.NightlyRate
             };
         }
 
-        public static RoomGetModel ToRoomGetModel(Rooms room)
+        public static RoomGetModel ToRoomGetModel(Room room)
         {
             return new RoomGetModel()
             {

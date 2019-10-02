@@ -1,12 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Services\Data\IBookingRepository.cs" />
+    <Compile Include="Services\Data\Impl\BookingRepository.cs" />
+    <Compile Include="Services\Data\Impl\Repository{TEntity}.cs" />
+    <Compile Include="Services\Data\Impl\RoomRepository.cs" />
+    <Compile Include="Services\Data\IRepository{TEntity}.cs" />
+    <Compile Include="Services\Data\IRoomRepository.cs" />
+    <Compile Include="Services\Impl\UnitOfWork.cs" />
+    <Compile Include="Services\IUnitOfWork.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

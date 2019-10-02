@@ -6,8 +6,8 @@ namespace GrandeHotel.Lib.Data.Services
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRoomsRepository Rooms { get; }
-        IBookingsRepository Bookings { get; }
+        IRoomRepository Rooms { get; }
+        IBookingRepository Bookings { get; }
         Task<int> Complete();
     }
 }

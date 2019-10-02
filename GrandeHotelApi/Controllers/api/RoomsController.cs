@@ -25,7 +25,7 @@ namespace GrandeHotelApi.Controllers.api
         [ProducesResponseType(400)]
         public async Task<ActionResult> CreateRoom([FromBody]RoomPostModel data)
         {
-            Rooms room = MappingService.ToRooms(data);
+            Room room = MappingService.ToRoom(data);
             using(var unitOfWork = new UnitOfWork(_context))
             {
                 await unitOfWork.Rooms.Add(room);
@@ -45,7 +45,7 @@ namespace GrandeHotelApi.Controllers.api
         {
             using(var unitOfWork = new UnitOfWork(_context))
             {
-                Rooms room = await unitOfWork.Rooms.Get(id);
+                Room room = await unitOfWork.Rooms.Get(id);
                 if (room == null) return NotFound();
                 RoomGetModel output = MappingService.ToRoomGetModel(room);
                 return Ok(output);

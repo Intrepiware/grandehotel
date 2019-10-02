@@ -19,13 +19,13 @@
     <None Update="ChangeScripts\Up\201910011452_create_schema.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ChangeScripts\Up\201910011454_create_rooms_table.sql">
+    <None Update="ChangeScripts\Up\201910011454_create_room_table.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ChangeScripts\Up\201910011505_create_api_user.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ChangeScripts\Up\201910011514_create_bookings_table.sql">
+    <None Update="ChangeScripts\Up\201910011514_create_booking_table.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="tools\kick-local.bat">

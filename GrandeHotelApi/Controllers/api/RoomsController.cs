@@ -1,10 +1,13 @@
 ﻿using GrandeHotel.Lib.Data;
 using GrandeHotel.Lib.Data.Models;
+using GrandeHotel.Lib.Data.Services;
 using GrandeHotel.Lib.Data.Services.Impl;
 using GrandeHotelApi.Models.Api;
 using GrandeHotelApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GrandeHotelApi.Controllers.api
@@ -13,24 +16,26 @@ namespace GrandeHotelApi.Controllers.api
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private readonly GrandeHotelContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RoomsController(GrandeHotelContext context)
+        public RoomsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Creates a new room
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>No content; Location header contains the url for the new room</returns>
         [HttpPost(Name = nameof(CreateRoom))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> CreateRoom([FromBody]RoomPostModel data)
         {
             Room room = MappingService.ToRoom(data);
-            using(var unitOfWork = new UnitOfWork(_context))
-            {
-                await unitOfWork.Rooms.Add(room);
-                await unitOfWork.Complete();
-            }
+            await _unitOfWork.Rooms.Add(room);
+            await _unitOfWork.Complete();
 
             return Created(Url.Link(
                 nameof(GetRoom),
@@ -38,18 +43,33 @@ namespace GrandeHotelApi.Controllers.api
                 null);
         }
 
+        /// <summary>
+        /// Retrieves an individual room
+        /// </summary>
+        /// <param name="id">Room Id</param>
+        /// <returns>The room record</returns>
         [HttpGet("{id}", Name = nameof(GetRoom))]
         [ProducesResponseType(404)]
         [ProducesResponseType(200)]
         public async Task<ActionResult> GetRoom(Guid id)
         {
-            using(var unitOfWork = new UnitOfWork(_context))
-            {
-                Room room = await unitOfWork.Rooms.Get(id);
-                if (room == null) return NotFound();
-                RoomGetModel output = MappingService.ToRoomGetModel(room);
-                return Ok(output);
-            }
+            Room room = await _unitOfWork.Rooms.Get(id);
+            if (room == null) return NotFound();
+            RoomGetModel output = MappingService.ToRoomGetModel(room);
+            return Ok(output);
+        }
+
+        /// <summary>
+        /// Retrieves a list of all rooms on the property
+        /// </summary>
+        /// <returns>A list of rooms</returns>
+        [HttpGet(Name = nameof(GetRooms))]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> GetRooms()
+        {
+            IEnumerable<Room> rooms = await _unitOfWork.Rooms.GetAll();
+            List<RoomGetModel> output = rooms.Select(MappingService.ToRoomGetModel).ToList();
+            return Ok(output);
         }
     }
 }

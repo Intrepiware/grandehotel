@@ -1,4 +1,6 @@
 ﻿using GrandeHotel.Lib.Data.Models;
+using GrandeHotel.Lib.Data.Services;
+using GrandeHotel.Lib.Data.Services.Impl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +26,7 @@ namespace GrandeHotelApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString("grande_hotel"));
             });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerDocument(options =>
             {

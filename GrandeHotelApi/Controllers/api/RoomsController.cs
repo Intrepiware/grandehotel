@@ -1,7 +1,5 @@
-﻿using GrandeHotel.Lib.Data;
-using GrandeHotel.Lib.Data.Models;
+﻿using GrandeHotel.Lib.Data.Models;
 using GrandeHotel.Lib.Data.Services;
-using GrandeHotel.Lib.Data.Services.Impl;
 using GrandeHotelApi.Models.Api;
 using GrandeHotelApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +24,7 @@ namespace GrandeHotelApi.Controllers.api
         /// <summary>
         /// Creates a new room
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The room data</param>
         /// <returns>No content; Location header contains the url for the new room</returns>
         [HttpPost(Name = nameof(CreateRoom))]
         [ProducesResponseType(204)]
@@ -70,6 +68,14 @@ namespace GrandeHotelApi.Controllers.api
             IEnumerable<Room> rooms = await _unitOfWork.Rooms.GetAll();
             List<RoomGetModel> output = rooms.Select(MappingService.ToRoomGetModel).ToList();
             return Ok(output);
+        }
+
+        [HttpGet("Availabilities", Name = nameof(GetRoomAvailabilities))]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> GetRoomAvailabilities()
+        {
+            IList<RoomAvailability> availabilities = await _unitOfWork.Rooms.GetRoomAvailabilities(30, 720);
+            return Ok(availabilities);
         }
     }
 }

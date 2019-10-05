@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="GrandeHotelContext.custom.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="Services\Data\IBookingRepository.cs" />
     <Compile Include="Services\Data\Impl\BookingRepository.cs" />
     <Compile Include="Services\Data\Impl\Repository{TEntity}.cs" />
@@ -25,10 +29,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

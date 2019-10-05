@@ -16,6 +16,9 @@
     <None Update="ChangeScripts\Permissions\201910011513_give_api_user_permissions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ChangeScripts\Sprocs\usp_get_availability.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ChangeScripts\Up\201910011452_create_schema.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -2,3 +2,5 @@
 GO
 ALTER ROLE [db_datawriter] ADD MEMBER [grandehotel_api]
 GO
+grant execute on [reservations].[usp_get_availability] to [grandehotel_api];
+GO

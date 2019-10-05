@@ -7,6 +7,5 @@ namespace GrandeHotel.Lib.Data.Services.Data
 {
     public interface IBookingRepository : IRepository<Booking>
     {
-        IEnumerable<Booking> GetAvailableRooms();
     }
 }

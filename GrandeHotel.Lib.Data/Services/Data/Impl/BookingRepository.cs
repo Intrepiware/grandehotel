@@ -11,9 +11,5 @@ namespace GrandeHotel.Lib.Data.Services.Data.Impl
         {
         }
 
-        public IEnumerable<Booking> GetAvailableRooms()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

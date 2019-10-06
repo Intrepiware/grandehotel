@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="GrandeHotelContext.custom.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Services\Data\IBookingRepository.cs" />
     <Compile Include="Services\Data\Impl\BookingRepository.cs" />
     <Compile Include="Services\Data\Impl\Repository{TEntity}.cs" />

@@ -7,9 +7,9 @@ namespace GrandeHotel.Lib.Data.Services.Impl
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly GrandeHotelContext _context;
+        private readonly GrandeHotelCustomContext _context;
 
-        public UnitOfWork(GrandeHotelContext context)
+        public UnitOfWork(GrandeHotelCustomContext context)
         {
             _context = context;
             Rooms = new RoomsRepository(context);

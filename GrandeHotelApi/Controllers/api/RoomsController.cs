@@ -48,7 +48,7 @@ namespace GrandeHotelApi.Controllers.api
         /// <returns>The room record</returns>
         [HttpGet("{id}", Name = nameof(GetRoom))]
         [ProducesResponseType(404)]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type=typeof(RoomGetModel))]
         public async Task<ActionResult> GetRoom(Guid id)
         {
             Room room = await _unitOfWork.Rooms.Get(id);
@@ -62,7 +62,7 @@ namespace GrandeHotelApi.Controllers.api
         /// </summary>
         /// <returns>A list of rooms</returns>
         [HttpGet(Name = nameof(GetRooms))]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type=typeof(List<RoomGetModel>))]
         public async Task<ActionResult> GetRooms()
         {
             IEnumerable<Room> rooms = await _unitOfWork.Rooms.GetAll();

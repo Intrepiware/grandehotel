@@ -44,7 +44,7 @@ namespace GrandeHotel.Lib.Data.Tests.Integration
         public void MigrateDatabase()
         {
             ProcessStartInfo processInfo = GetRHProcess();
-            processInfo.Arguments = $"--cs \"{TestConnectionString}\" -f ChangeScripts --silent | more";
+            processInfo.Arguments = $"--cs \"{TestConnectionString}\" -f ChangeScripts --silent";
             var process = Process.Start(processInfo);
             process.WaitForExit();
             if (process.ExitCode != 0) throw new Exception();

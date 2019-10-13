@@ -28,16 +28,23 @@ namespace GrandeHotel.Lib.Data.Services.Data.Impl
 
         public Guid CreateBooking(Guid roomId, DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            using (DbConnection connection = Context.Database.GetDbConnection())
-            using(DbCommand cmd = connection.CreateCommand())
+            DbConnection connection = Context.Database.GetDbConnection();
+            try
             {
-                cmd.CommandText = "reservations.usp_create_booking";
-                cmd.CreateParameterWithValue("room_id", roomId);
-                cmd.CreateParameterWithValue("start_date", startDate);
-                cmd.CreateParameterWithValue("end_date", endDate);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                connection.Open();
-                return (Guid)cmd.ExecuteScalar();
+                using (DbCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "reservations.usp_create_booking";
+                    cmd.CreateParameterWithValue("room_id", roomId);
+                    cmd.CreateParameterWithValue("start_date", startDate);
+                    cmd.CreateParameterWithValue("end_date", endDate);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    connection.Open();
+                    return (Guid)cmd.ExecuteScalar();
+                }
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 

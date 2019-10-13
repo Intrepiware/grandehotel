@@ -16,7 +16,13 @@ begin
 	begin
 		declare @booking_id uniqueidentifier = newid();
 		insert into reservations.booking(booking_id, room_id, start_date, end_date, amount)
-		values (@booking_id, @room_id, @start_date, @end_date, 1);
+		select	@booking_id, 
+				@room_id, 
+				@start_date, 
+				@end_date,
+				room.nightly_rate
+		from reservations.room
+		where room_id = @room_id;
 		commit;
 		select @booking_id;
 	end

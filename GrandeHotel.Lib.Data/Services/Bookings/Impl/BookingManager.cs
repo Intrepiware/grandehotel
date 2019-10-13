@@ -1,5 +1,7 @@
-﻿using System;
+﻿using GrandeHotel.Lib.Data.Models.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Text;
 
 namespace GrandeHotel.Lib.Data.Services.Bookings.Impl
@@ -15,7 +17,16 @@ namespace GrandeHotel.Lib.Data.Services.Bookings.Impl
 
         public Guid MakeReservation(Guid roomId, DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            return _unitOfWork.Bookings.CreateBooking(roomId, startDate, endDate);
+            if (endDate < startDate) throw new BookingException("The booking's End Date is before the Start Date");
+
+            try
+            {
+                return _unitOfWork.Bookings.CreateBooking(roomId, startDate, endDate);
+            }
+            catch(DbException dbEx) when (dbEx.Message.Contains("conflicts with another booking"))
+            {
+                throw new BookingException(dbEx.Message);
+            }
         }
     }
 }

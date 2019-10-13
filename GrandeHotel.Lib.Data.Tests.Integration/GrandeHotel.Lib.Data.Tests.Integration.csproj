@@ -23,6 +23,9 @@
     <None Update="TestSqlScripts\Services\Bookings\BookingManagerTests.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestSqlScripts\Services\Data\BookingRepositoryStressTests.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestSqlScripts\Services\Data\RoomRepositoryTests.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

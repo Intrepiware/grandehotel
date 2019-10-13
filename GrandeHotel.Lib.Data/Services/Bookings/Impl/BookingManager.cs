@@ -1,8 +1,6 @@
 ﻿using GrandeHotel.Lib.Data.Models.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 
 namespace GrandeHotel.Lib.Data.Services.Bookings.Impl
 {
@@ -23,9 +21,9 @@ namespace GrandeHotel.Lib.Data.Services.Bookings.Impl
             {
                 return _unitOfWork.Bookings.CreateBooking(roomId, startDate, endDate);
             }
-            catch(DbException dbEx) when (dbEx.Message.Contains("conflicts with another booking"))
+            catch(DbException dbEx) when (dbEx.Message.Contains("conflicts with another booking") || dbEx.Message.Contains("deadlock"))
             {
-                throw new BookingException(dbEx.Message);
+                throw new BookingException("Booking conflicts with another booking");
             }
         }
     }

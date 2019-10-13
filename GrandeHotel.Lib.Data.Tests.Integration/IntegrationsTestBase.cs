@@ -106,6 +106,17 @@ namespace GrandeHotel.Lib.Data.Tests.Integration
             }
         }
 
+        public T ExecuteScalar<T>(string query)
+        {
+            using (var connection = new SqlConnection(TestConnectionString))
+            {
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = query;
+                connection.Open();
+                return (T)cmd.ExecuteScalar();
+            }
+        }
+
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {

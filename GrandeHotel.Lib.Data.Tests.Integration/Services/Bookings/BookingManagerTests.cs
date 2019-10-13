@@ -2,8 +2,6 @@
 using GrandeHotel.Lib.Data.Services.Bookings.Impl;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GrandeHotel.Lib.Data.Tests.Integration.Services.Bookings
 {

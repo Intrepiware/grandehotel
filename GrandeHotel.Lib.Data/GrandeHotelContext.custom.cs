@@ -1,6 +1,4 @@
-﻿using GrandeHotel.Lib.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GrandeHotel.Lib.Data.Models
 {

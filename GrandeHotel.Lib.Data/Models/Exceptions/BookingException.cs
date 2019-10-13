@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GrandeHotel.Lib.Data.Models.Exceptions
 {

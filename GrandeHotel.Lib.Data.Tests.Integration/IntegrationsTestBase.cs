@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace GrandeHotel.Lib.Data.Tests.Integration
 {

@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Services\Bookings\IBookingManager.cs" />
+    <Compile Include="Services\Bookings\Impl\BookingManager.cs" />
+    <Compile Include="Services\Data\DbCommandExtensions.cs" />
     <Compile Include="Services\Data\IBookingRepository.cs" />
     <Compile Include="Services\Data\Impl\BookingRepository.cs" />
     <Compile Include="Services\Data\Impl\Repository{TEntity}.cs" />

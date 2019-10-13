@@ -13,7 +13,7 @@ namespace GrandeHotel.Lib.Data.Tests.Integration.Services.Bookings
         private BookingManager _bookingManager;
         Guid _roomId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
-        private readonly object[] ConflictingBookingTimes = new[]
+        private static readonly object[] ConflictingBookingTimes = new[]
         {
             // Overlaps first day of existing reservation
             new object[] { new DateTimeOffset(2018, 12, 30, 12, 00, 00, TimeSpan.FromHours(-5)), new DateTimeOffset(2019, 1, 1, 11, 59, 0, TimeSpan.FromHours(-5)) },

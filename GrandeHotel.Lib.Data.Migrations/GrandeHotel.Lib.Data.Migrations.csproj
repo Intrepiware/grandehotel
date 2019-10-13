@@ -16,6 +16,15 @@
     <None Update="ChangeScripts\Permissions\201910011513_give_api_user_permissions.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ChangeScripts\RunFirstAfterUp\ck_start_date_end_date.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ChangeScripts\RunFirstAfterUp\df_booking_timestamp_utc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ChangeScripts\Sprocs\usp_create_booking.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ChangeScripts\Sprocs\usp_get_availability.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -29,6 +38,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ChangeScripts\Up\201910011514_create_booking_table.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ChangeScripts\Up\201910130923_create_booking_timestamp_column.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="tools\kick-local.bat">

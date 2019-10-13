@@ -1,4 +1,6 @@
-﻿using GrandeHotel.Lib.Data.Models;
+﻿using Dapper;
+using Dynamitey;
+using GrandeHotel.Lib.Data.Models;
 using GrandeHotel.Lib.Data.Services.Impl;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -7,8 +9,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace GrandeHotel.Lib.Data.Tests.Integration
 {
@@ -72,6 +74,45 @@ namespace GrandeHotel.Lib.Data.Tests.Integration
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
                 }
+            }
+        }
+        public void SqlResultMatches(IEnumerable<dynamic> expectedResult, string actualQuery)
+        {
+            using (var connection = new SqlConnection(TestConnectionString))
+            {
+                connection.Open();
+
+                var actualResult = connection.Query(actualQuery).ToList();
+
+                NUnit.Framework.Assert.AreEqual(expectedResult.Count(), actualResult.Count, "Total Row Count");
+
+                for (int i = 0; i < expectedResult.Count(); i++)
+                {
+                    var expectedObject = expectedResult.ElementAt(i);
+                    var actualObject = actualResult[i];
+
+                    var properties = Dynamic.GetMemberNames(expectedObject);
+
+                    foreach (var property in properties)
+                    {
+                        var expected = Dynamic.InvokeGet(expectedObject, property);
+                        var actual = Dynamic.InvokeGet(actualObject, property);
+
+                        NUnit.Framework.Assert.AreEqual(expected, actual, $"Row {i + 1} - {property}");
+                    }
+                }
+
+            }
+        }
+
+        public T ExecuteScalar<T>(string query)
+        {
+            using (var connection = new SqlConnection(TestConnectionString))
+            {
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = query;
+                connection.Open();
+                return (T)cmd.ExecuteScalar();
             }
         }
 

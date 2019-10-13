@@ -75,6 +75,16 @@ namespace GrandeHotel.Lib.Data.Tests.Integration.Services.Bookings
             StringAssert.Contains("End Date", exception.Message);
         }
 
+        [Test, Parallelizable]
+        public void MakeReservation_InvalidRoomId_Throws()
+        {
+            BookingException exception = Assert.Throws<BookingException>(() =>
+                _bookingManager.MakeReservation(Guid.NewGuid(), new DateTimeOffset(2019, 1, 1, 0, 0, 0, _cst), new DateTimeOffset(2019, 1, 2, 0, 0, 0, _cst)));
+
+            StringAssert.Contains("Room Id", exception.Message);
+
+        }
+
 
         private void RunNonConflictingReservations()
         {

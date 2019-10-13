@@ -10,6 +10,13 @@ create proc reservations.usp_create_booking (
 as
 begin
 	set nocount on;
+
+	declare @rate money = (select top 1 nightly_rate
+							from reservations.room
+							where room.room_id = @room_id);
+
+	if @rate is null throw 51000, 'Booking Exception: Room Id is invalid', 1;
+
 	set transaction isolation level serializable;
 	begin tran
 	if not exists (select 1 from reservations.booking where start_date <= @end_date and end_date > @start_date and room_id = @room_id)
@@ -29,7 +36,7 @@ begin
 	else
 	begin
 		rollback;
-		throw 51000, 'Booking conflicts with another booking', 1;
+		throw 51000, 'Booking Exception: Booking conflicts with another booking', 1;
 	end
 end;
 

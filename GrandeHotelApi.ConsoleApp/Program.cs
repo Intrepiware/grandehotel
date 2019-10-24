@@ -1,6 +1,8 @@
 ﻿using GrandeHotel.Lib.Data.Models;
 using GrandeHotel.Lib.Data.Services;
 using GrandeHotel.Lib.Data.Services.Impl;
+using GrandeHotelApi.ConsoleApp.Services;
+using GrandeHotelApi.ConsoleApp.Services.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +18,7 @@ namespace GrandeHotelApi.ConsoleApp
 
             ServiceProvider provider = services.BuildServiceProvider();
 
-            provider.GetService<ConsoleApp>().Run().Wait();
+            provider.GetService<ConsoleApp>().RunWithGeneratedUnitOfWork().Wait();
         }
 
         static IServiceCollection ConfigureServices()
@@ -35,6 +37,7 @@ namespace GrandeHotelApi.ConsoleApp
             serviceProvider.AddDbContext<GrandeHotelCustomContext>(options => options.UseSqlServer(config.GetConnectionString("grande_hotel")));
             serviceProvider.AddTransient<IUnitOfWork, UnitOfWork>();
             serviceProvider.AddTransient<ConsoleApp>();
+            serviceProvider.AddTransient<IUnitOfWorkFactory, UnitOfWorkFactory>();
             return serviceProvider;
         }
     }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,28 +61,14 @@ namespace GrandeHotelApi
             {
                 options.Title = "Grande Hotel Api";
                 options.Description = "Manage reservations at the Grande Hotel, London, UK";
-
-                // TODO: Re-add when we implement auth/auth
-                //options.AddSecurity("bearer", new string[0], new NSwag.OpenApiSecurityScheme
-                //{
-                //    Type = NSwag.OpenApiSecuritySchemeType.OAuth2,
-                //    Description = "Copy 'Bearer ' + valid token (retrieved by using \"/token\" entrypoint) into the field",
-                //    Flow = NSwag.OpenApiOAuth2Flow.Password,
-                //    Flows = new NSwag.OpenApiOAuthFlows
-                //    {
-                //        Password = new NSwag.OpenApiOAuthFlow
-                //        {
-                //            TokenUrl = "https://localhost:44350/token"
-                //        }
-                //    }
-                //});
-
-                //options.OperationProcessors.Add(new OperationSecurityScopeProcessor("bearer"));
             });
 
             services.Configure<OktaSettings>(Configuration.GetSection("Okta"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,6 +88,12 @@ namespace GrandeHotelApi
             app.UseSwaggerUi3();
             app.UseAuthentication();
             app.UseMvc();
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+                if (env.IsDevelopment()) spa.UseReactDevelopmentServer(npmScript: "start");
+            });
         }
     }
 }

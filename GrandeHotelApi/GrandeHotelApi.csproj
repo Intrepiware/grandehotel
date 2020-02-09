@@ -18,4 +18,8 @@
     <ProjectReference Include="..\GrandeHotel.Lib.Data\GrandeHotel.Lib.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClientApp\NewFolder\" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@
 using GrandeHotel.Lib.Data.Services;
 using GrandeHotelApi.Models.Api;
 using GrandeHotelApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,14 @@ namespace GrandeHotelApi.Controllers.api
         {
             IList<RoomAvailability> availabilities = await _unitOfWork.Rooms.GetRoomAvailabilities(30, 720);
             return Ok(availabilities);
+        }
+
+        [HttpGet("Protected", Name = nameof(GetProtected))]
+        [ProducesResponseType(200)]
+        [Authorize]
+        public ActionResult GetProtected()
+        {
+            return Ok("You found me");
         }
     }
 }

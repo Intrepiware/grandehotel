@@ -7,11 +7,10 @@ using GrandeHotelApi.Services.Impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 
@@ -57,22 +56,29 @@ namespace GrandeHotelApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<ITokenService, OktaTokenService>();
 
-            services.AddSwaggerDocument(options =>
+            services.AddControllers();
+            services.AddOpenApiDocument(config =>
             {
-                options.Title = "Grande Hotel Api";
-                options.Description = "Manage reservations at the Grande Hotel, London, UK";
+                // Document name (default to: v1)
+                config.DocumentName = "Grande Hotel API";
+
+                // Document / API version (default to: 1.0.0)
+                config.Version = "1.0.0";
+
+                // Document title (default to: My Title)
+                config.Title = "Grade Hotel API";
+
+                // Document description
+                config.Description = "API for the fictional Grande Hotel";
             });
 
             services.Configure<OktaSettings>(Configuration.GetSection("Okta"));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -84,16 +90,19 @@ namespace GrandeHotelApi
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseAuthentication();
-            app.UseMvc();
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-                if (env.IsDevelopment()) spa.UseReactDevelopmentServer(npmScript: "start");
-            });
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            app.UseSpaStaticFiles();
+            app.UseSpa(spa => spa.Options.SourcePath = "ClientApp");
         }
     }
 }

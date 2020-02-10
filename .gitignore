@@ -31,3 +31,4 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 /GrandeHotelApi/ClientApp/node_modules/*
+/GrandeHotelApi/ClientApp/dist/*

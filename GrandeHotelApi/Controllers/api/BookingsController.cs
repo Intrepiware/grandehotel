@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GrandeHotelApi.Controllers.api
 {
-    [Route("/[controller]")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class BookingsController : ControllerBase
     {

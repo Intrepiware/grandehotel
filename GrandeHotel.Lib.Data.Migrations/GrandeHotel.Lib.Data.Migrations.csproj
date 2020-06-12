@@ -43,6 +43,12 @@
     <None Update="ChangeScripts\Up\201910130923_create_booking_timestamp_column.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ChangeScripts\Up\202006120548_create_user_table.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ChangeScripts\Up\202006120613_user_create_date_default.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="tools\kick-local.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

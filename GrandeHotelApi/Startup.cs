@@ -53,8 +53,6 @@ namespace GrandeHotelApi
                     };
                 });
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddSingleton<ITokenService, OktaTokenService>();
 
             services.AddControllers();
             services.AddOpenApiDocument(config =>
@@ -72,7 +70,6 @@ namespace GrandeHotelApi
                 config.Description = "API for the fictional Grande Hotel";
             });
 
-            services.Configure<OktaSettings>(Configuration.GetSection("Okta"));
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
 
         }

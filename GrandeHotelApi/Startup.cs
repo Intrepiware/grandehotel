@@ -1,14 +1,11 @@
 ﻿using GrandeHotel.Lib.Data.Models;
 using GrandeHotelApi.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
 
 namespace GrandeHotelApi
 {
@@ -29,48 +26,9 @@ namespace GrandeHotelApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<GrandeHotelCustomContext>(options => options.UseSqlServer(Configuration.GetConnectionString("grande_hotel")));
-
-            services.AddAuthentication(options => options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = "https://dev-566527.okta.com/oauth2/default";
-                    options.Audience = "api://grande-hotel";
-                    // options.RequireHttpsMetadata = false;
-                    // options.MetadataAddress = 
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ClockSkew = TimeSpan.FromMinutes(5),
-                        RequireExpirationTime = true,
-                        ValidateLifetime = true,
-                        ValidateAudience = true,
-                        ValidAudience = "api://grande-hotel",
-                        ValidateIssuer = true,
-                        ValidIssuer = "https://dev-566527.okta.com/oauth2/default",
-                        // Meta
-                    };
-                });
-
-
             services.AddControllers();
-            services.AddOpenApiDocument(config =>
-            {
-                // Document name (default to: v1)
-                config.DocumentName = "Grande Hotel API";
-
-                // Document / API version (default to: 1.0.0)
-                config.Version = "1.0.0";
-
-                // Document title (default to: My Title)
-                config.Title = "Grade Hotel API";
-
-                // Document description
-                config.Description = "API for the fictional Grande Hotel";
-            });
-
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
-
             IOC.Register(services, Configuration, _webHostEnvironment.IsDevelopment());
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,8 +47,6 @@ namespace GrandeHotelApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
             app.UseAuthentication();
 
             app.UseRouting();

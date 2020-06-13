@@ -1,12 +1,9 @@
 ﻿using GrandeHotel.Lib.Data.Services;
 using GrandeHotel.Lib.Data.Services.Impl;
-using GrandeHotelApi.Models.Auth;
-using GrandeHotelApi.Services.Impl;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace GrandeHotelApi.Services
+namespace GrandeHotel.Web.Services
 {
     public static class IOC
     {
@@ -35,8 +32,6 @@ namespace GrandeHotelApi.Services
             IConfiguration config)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddSingleton<ITokenService, OktaTokenService>();
-            services.Configure<OktaSettings>(config.GetSection("Okta"));
             return services;
         }
     }

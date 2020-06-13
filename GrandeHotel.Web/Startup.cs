@@ -1,5 +1,5 @@
 ﻿using GrandeHotel.Lib.Data.Models;
-using GrandeHotelApi.Services;
+using GrandeHotel.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace GrandeHotelApi
+namespace GrandeHotel.Web
 {
     public class Startup
     {

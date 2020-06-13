@@ -19,4 +19,8 @@
     <ProjectReference Include="..\GrandeHotel.Lib.Data\GrandeHotel.Lib.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Impl\" />
+  </ItemGroup>
+
 </Project>

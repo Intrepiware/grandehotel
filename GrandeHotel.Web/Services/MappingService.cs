@@ -1,11 +1,7 @@
 ﻿using GrandeHotel.Lib.Data.Models;
-using GrandeHotelApi.Models.Api;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GrandeHotel.Web.Models.Api;
 
-namespace GrandeHotelApi.Services
+namespace GrandeHotel.Web.Services
 {
     public static class MappingService
     {

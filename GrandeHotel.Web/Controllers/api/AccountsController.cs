@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace GrandeHotelApi.Controllers.api
+namespace GrandeHotel.Web.Controllers.api
 {
     [Route("api/[controller]")]
     [ApiController]

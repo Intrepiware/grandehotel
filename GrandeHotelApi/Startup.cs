@@ -1,9 +1,5 @@
 ﻿using GrandeHotel.Lib.Data.Models;
-using GrandeHotel.Lib.Data.Services;
-using GrandeHotel.Lib.Data.Services.Impl;
-using GrandeHotelApi.Models.Auth;
 using GrandeHotelApi.Services;
-using GrandeHotelApi.Services.Impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,9 +14,13 @@ namespace GrandeHotelApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public Startup(IConfiguration configuration,
+            IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,10 +28,7 @@ namespace GrandeHotelApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GrandeHotelCustomContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("grande_hotel"));
-            });
+            services.AddDbContext<GrandeHotelCustomContext>(options => options.UseSqlServer(Configuration.GetConnectionString("grande_hotel")));
 
             services.AddAuthentication(options => options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -71,6 +68,8 @@ namespace GrandeHotelApi
             });
 
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
+
+            IOC.Register(services, Configuration, _webHostEnvironment.IsDevelopment());
 
         }
 

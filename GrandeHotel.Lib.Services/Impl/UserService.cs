@@ -2,6 +2,7 @@
 using GrandeHotel.Lib.Data.Services;
 using GrandeHotel.Lib.Services.Security;
 using GrandeHotel.Models;
+using System.Threading.Tasks;
 
 namespace GrandeHotel.Lib.Services.Impl
 {
@@ -17,7 +18,7 @@ namespace GrandeHotel.Lib.Services.Impl
             _passwordHashService = passwordHashService;
         }
 
-        public int Create(UserCreateModel userModel)
+        public async Task<int> Create(UserCreateModel userModel)
         {
             var user = new User
             {
@@ -29,8 +30,8 @@ namespace GrandeHotel.Lib.Services.Impl
 
             using(var uow = _unitOfWorkFactory.Generate())
             {
-                uow.Users.Add(user);
-                uow.Complete();
+                await uow.Users.Add(user);
+                await uow.Complete();
                 return user.UserId;
             }
         }

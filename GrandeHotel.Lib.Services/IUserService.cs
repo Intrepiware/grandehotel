@@ -1,9 +1,10 @@
 ﻿using GrandeHotel.Models;
+using System.Threading.Tasks;
 
 namespace GrandeHotel.Lib.Services
 {
     public interface IUserService
     {
-        int Create(UserCreateModel userModel);
+        Task<int> Create(UserCreateModel userModel);
     }
 }

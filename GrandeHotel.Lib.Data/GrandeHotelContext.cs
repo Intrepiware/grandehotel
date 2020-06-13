@@ -17,6 +17,7 @@ namespace GrandeHotel.Lib.Data.Models
 
         public virtual DbSet<Booking> Booking { get; set; }
         public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,6 +54,11 @@ namespace GrandeHotel.Lib.Data.Models
 
                 entity.Property(e => e.StartDate).HasColumnName("start_date");
 
+                entity.Property(e => e.TimestampUtc)
+                    .HasColumnName("timestamp_utc")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(sysutcdatetime())");
+
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Booking)
                     .HasForeignKey(d => d.RoomId)
@@ -80,6 +86,46 @@ namespace GrandeHotel.Lib.Data.Models
                 entity.Property(e => e.NightlyRate)
                     .HasColumnName("nightly_rate")
                     .HasColumnType("money");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user", "reservations");
+
+                entity.HasIndex(e => e.Email)
+                    .HasName("uq_user_email")
+                    .IsUnique();
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.Property(e => e.CreateDate)
+                    .HasColumnName("create_date")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasColumnName("first_name")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasColumnName("last_name")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
         }
     }

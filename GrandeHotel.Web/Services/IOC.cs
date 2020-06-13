@@ -1,5 +1,7 @@
 ﻿using GrandeHotel.Lib.Data.Services;
 using GrandeHotel.Lib.Data.Services.Impl;
+using GrandeHotel.Lib.Services.Security;
+using GrandeHotel.Lib.Services.Security.Impl;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,11 +22,13 @@ namespace GrandeHotel.Web.Services
 
         private static IServiceCollection Development(IServiceCollection services)
         {
+            services.AddSingleton<IPasswordHashService, DoNothingPasswordHashService>();
             return services;
         }
 
         private static IServiceCollection Production(IServiceCollection services)
         {
+            services.AddSingleton<IPasswordHashService, BCryptPasswordHashService>();
             return services;
         }
 

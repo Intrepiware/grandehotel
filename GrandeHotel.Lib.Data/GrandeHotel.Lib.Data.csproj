@@ -23,7 +23,9 @@
     <Compile Include="Services\Data\IRoomRepository.cs" />
     <Compile Include="Services\Data\IUserRepository.cs" />
     <Compile Include="Services\Impl\UnitOfWork.cs" />
+    <Compile Include="Services\Impl\UnitOfWorkFactory.cs" />
     <Compile Include="Services\IUnitOfWork.cs" />
+    <Compile Include="Services\IUnitOfWorkFactory.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,26 +1,43 @@
-﻿using GrandeHotel.Models;
+﻿using GrandeHotel.Lib.Data.Services;
+using GrandeHotel.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using GrandeHotel.Lib.Data.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GrandeHotel.Lib.Services.Security.Impl
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IPasswordHashService _passwordHashService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkFactory _uowFactory;
 
-        public AuthenticationService(IUnitOfWork unitOfWork,
+        public AuthenticationService(IUnitOfWorkFactory unitOfWorkFactory,
             IPasswordHashService passwordHashService)
         {
             _passwordHashService = passwordHashService;
-            _unitOfWork = unitOfWork;
+            _uowFactory = unitOfWorkFactory;
         }
-        public UserTokenModel Authenticate(string username, string password)
+
+        public async Task<UserTokenModel> Authenticate(string username, string password)
         {
-            throw new NotImplementedException();
+            if (username != null)
+            {
+                using (var uow = _uowFactory.Generate())
+                {
+                    var user = (await uow.Users.Find(u => u.Email.ToLower() == username.ToLower())).SingleOrDefault();
+                    if (_passwordHashService.Validate(password, user.Password))
+                    {
+                        return new UserTokenModel
+                        {
+                            Token = "tbd",
+                            UserId = user.UserId
+                        };
+                    }
+                }
+            }
+            return null;
         }
+
         public string CreateToken(int userId) => throw new NotImplementedException();
     }
 }

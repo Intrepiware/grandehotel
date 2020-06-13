@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrandeHotelApi.Models.Api
+namespace GrandeHotel.Web.Models.Api
 {
     public class RoomPostModel
     {

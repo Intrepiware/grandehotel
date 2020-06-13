@@ -10,16 +10,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
-    <PackageReference Include="NSwag.AspNetCore" Version="13.2.2" />
-    <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.2.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GrandeHotel.Lib.Data\GrandeHotel.Lib.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Impl\" />
   </ItemGroup>
 
 </Project>

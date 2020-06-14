@@ -23,12 +23,9 @@ namespace GrandeHotel.Console.Test.Services
             _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
         }
 
-        public ContainerGenerator WithMockedUnitOfWorkFactory()
+        public ContainerGenerator WithUnitOfWork()
         {
-            var uowFactory = Substitute.For<IUnitOfWorkFactory>();
-            uowFactory.Generate().Returns(_ => _container.GetInstance<IUnitOfWork>());
-            _container.RegisterInstance(uowFactory);
-            _container.Register<IUnitOfWork>(() => new UnitOfWork(_container.GetInstance<GrandeHotelCustomContext>()), Lifestyle.Scoped);
+            _container.RegisterSingleton<IUnitOfWork, UnitOfWork>();
             return this;
         }
 

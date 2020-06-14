@@ -9,30 +9,27 @@ namespace GrandeHotel.Lib.Services.Security.Impl
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IPasswordHashService _passwordHashService;
-        private readonly IUnitOfWorkFactory _uowFactory;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthenticationService(IUnitOfWorkFactory unitOfWorkFactory,
+        public AuthenticationService(IUnitOfWork unitOfWork,
             IPasswordHashService passwordHashService)
         {
             _passwordHashService = passwordHashService;
-            _uowFactory = unitOfWorkFactory;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UserTokenModel> Authenticate(string username, string password)
         {
             if (username != null)
             {
-                using (var uow = _uowFactory.Generate())
+                var user = (await _unitOfWork.Users.Find(u => u.Email.ToLower() == username.ToLower())).SingleOrDefault();
+                if (_passwordHashService.Validate(password, user.Password))
                 {
-                    var user = (await uow.Users.Find(u => u.Email.ToLower() == username.ToLower())).SingleOrDefault();
-                    if (_passwordHashService.Validate(password, user.Password))
+                    return new UserTokenModel
                     {
-                        return new UserTokenModel
-                        {
-                            Token = "tbd",
-                            UserId = user.UserId
-                        };
-                    }
+                        Token = "tbd",
+                        UserId = user.UserId
+                    };
                 }
             }
             return null;

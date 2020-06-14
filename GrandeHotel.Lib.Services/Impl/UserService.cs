@@ -8,13 +8,13 @@ namespace GrandeHotel.Lib.Services.Impl
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordHashService _passwordHashService;
 
-        public UserService(IUnitOfWorkFactory unitOfWorkFactory,
+        public UserService(IUnitOfWork unitOfWork,
             IPasswordHashService passwordHashService)
         {
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWork = unitOfWork;
             _passwordHashService = passwordHashService;
         }
 
@@ -28,12 +28,9 @@ namespace GrandeHotel.Lib.Services.Impl
                 Password = _passwordHashService.Hash(userModel.CleartextPassword)
             };
 
-            using(var uow = _unitOfWorkFactory.Generate())
-            {
-                await uow.Users.Add(user);
-                await uow.Complete();
-                return user.UserId;
-            }
+            await _unitOfWork.Users.Add(user);
+            await _unitOfWork.Complete();
+            return user.UserId;
         }
     }
 }

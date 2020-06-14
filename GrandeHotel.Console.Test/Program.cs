@@ -8,6 +8,7 @@ namespace GrandeHotel.Console.Test
         static void Main(string[] args)
         {
             UserServiceTest.CreateUserNoHash().Wait();
+            UserServiceTest.CreateUserWithHash().Wait();
         }
     }
 }

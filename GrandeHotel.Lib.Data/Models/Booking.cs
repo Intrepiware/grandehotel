@@ -10,6 +10,7 @@ namespace GrandeHotel.Lib.Data.Models
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset EndDate { get; set; }
         public decimal Amount { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public virtual Room Room { get; set; }
     }

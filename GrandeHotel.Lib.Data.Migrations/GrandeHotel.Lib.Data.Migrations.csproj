@@ -49,6 +49,9 @@
     <None Update="ChangeScripts\Up\202006120613_user_create_date_default.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ChangeScripts\Up\202006132023_rename_booking_timestamp_col.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="tools\kick-local.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

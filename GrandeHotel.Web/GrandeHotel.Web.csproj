@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GrandeHotel.Lib.Data\GrandeHotel.Lib.Data.csproj" />
+    <ProjectReference Include="..\GrandeHotel.Lib.Services\GrandeHotel.Lib.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,11 +14,14 @@ namespace GrandeHotel.Lib.Data.Services.Impl
             _context = context;
             Rooms = new RoomsRepository(context);
             Bookings = new BookingsRepository(context);
+            Users = new UserRepository(context);
         }
 
-        public IRoomRepository Rooms { get; private set; }
+        public IRoomRepository Rooms { get; }
 
-        public IBookingRepository Bookings { get; private set; }
+        public IBookingRepository Bookings { get; }
+
+        public IUserRepository Users { get; }
 
         public async Task<int> Complete()
         {

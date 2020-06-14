@@ -18,8 +18,10 @@
     <Compile Include="Services\Data\Impl\BookingRepository.cs" />
     <Compile Include="Services\Data\Impl\Repository{TEntity}.cs" />
     <Compile Include="Services\Data\Impl\RoomRepository.cs" />
+    <Compile Include="Services\Data\Impl\UserRepository.cs" />
     <Compile Include="Services\Data\IRepository{TEntity}.cs" />
     <Compile Include="Services\Data\IRoomRepository.cs" />
+    <Compile Include="Services\Data\IUserRepository.cs" />
     <Compile Include="Services\Impl\UnitOfWork.cs" />
     <Compile Include="Services\IUnitOfWork.cs" />
   </ItemGroup>

@@ -8,6 +8,7 @@ namespace GrandeHotel.Lib.Data.Services
     {
         IRoomRepository Rooms { get; }
         IBookingRepository Bookings { get; }
+        IUserRepository Users { get; }
         Task<int> Complete();
     }
 }

@@ -48,16 +48,16 @@ namespace GrandeHotel.Lib.Data.Models
                     .HasColumnName("amount")
                     .HasColumnType("money");
 
+                entity.Property(e => e.CreateDate)
+                    .HasColumnName("create_date")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(sysutcdatetime())");
+
                 entity.Property(e => e.EndDate).HasColumnName("end_date");
 
                 entity.Property(e => e.RoomId).HasColumnName("room_id");
 
                 entity.Property(e => e.StartDate).HasColumnName("start_date");
-
-                entity.Property(e => e.TimestampUtc)
-                    .HasColumnName("timestamp_utc")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(sysutcdatetime())");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Booking)

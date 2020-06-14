@@ -1,0 +1,1 @@
+﻿exec sp_rename '[reservations].[booking].[timestamp_utc]', 'create_date'

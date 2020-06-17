@@ -32,3 +32,5 @@ _ReSharper*/
 packages/
 /GrandeHotelApi/ClientApp/node_modules/*
 /GrandeHotelApi/ClientApp/dist/*
+/GrandeHotel.Web/ClientApp/dist/*
+/GrandeHotel.Web/ClientApp/node_modules/*

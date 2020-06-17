@@ -54,7 +54,15 @@ namespace GrandeHotel.Web
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
             app.UseSpaStaticFiles();
-            app.UseSpa(spa => spa.Options.SourcePath = "ClientApp");
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8082");
+                }
+            });
         }
     }
 }

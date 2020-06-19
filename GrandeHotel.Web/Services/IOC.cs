@@ -2,6 +2,7 @@
 using GrandeHotel.Lib.Data.Services.Impl;
 using GrandeHotel.Lib.Services.Security;
 using GrandeHotel.Lib.Services.Security.Impl;
+using GrandeHotel.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +37,8 @@ namespace GrandeHotel.Web.Services
             IConfiguration config)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.Configure<AppSettings>(config);
             return services;
         }
     }

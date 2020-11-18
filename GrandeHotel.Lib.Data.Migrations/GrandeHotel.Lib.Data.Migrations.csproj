@@ -1,8 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ChangeScripts\RunFirstAfterUp\df_booking_timestamp_utc.sql" />
+    <None Remove="ChangeScripts\Sprocs\usp_create_booking.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ChangeScripts\Sprocs\usp_create_booking.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="roundhouse" Version="1.1.0" />
@@ -17,12 +28,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ChangeScripts\RunFirstAfterUp\ck_start_date_end_date.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ChangeScripts\RunFirstAfterUp\df_booking_timestamp_utc.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ChangeScripts\Sprocs\usp_create_booking.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ChangeScripts\Sprocs\usp_get_availability.sql">

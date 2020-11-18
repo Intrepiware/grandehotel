@@ -18,7 +18,7 @@ namespace GrandeHotel.Lib.Data.Tests.Integration
     {
         // private const string ContentRootLocation = "..\\..\\..\\..\\TigerPistol.Video";
         public const string TestConnectionString = "Server=(local);Database=GrandeHotel_test;Trusted_Connection=True;";
-        public const string RoundhouseStartLocation = "..\\..\\..\\..\\GrandeHotel.Lib.Data.Migrations\\bin\\debug\\netstandard2.0";
+        public const string RoundhouseStartLocation = "..\\..\\..\\..\\GrandeHotel.Lib.Data.Migrations\\bin\\debug\\netstandard2.1";
         public const string TestDataLocation = "TestSqlScripts";
 
         protected readonly UnitOfWork _unitOfWork;

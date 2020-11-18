@@ -22,12 +22,13 @@ begin
 	if not exists (select 1 from reservations.booking where start_date <= @end_date and end_date > @start_date and room_id = @room_id)
 	begin
 		declare @booking_id uniqueidentifier = newid();
-		insert into reservations.booking(booking_id, room_id, start_date, end_date, amount)
+		insert into reservations.booking(booking_id, room_id, start_date, end_date, amount, create_date)
 		select	@booking_id, 
 				@room_id, 
 				@start_date, 
 				@end_date,
-				room.nightly_rate
+				room.nightly_rate,
+				getutcdate()
 		from reservations.room
 		where room_id = @room_id;
 		commit;

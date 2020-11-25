@@ -19,6 +19,9 @@ function Nav() {
           <Link to="/shop" className="navbar-item">
             Shop
           </Link>
+          <Link to="/about" className="navbar-item">
+            About
+          </Link>
         </div>
         <div className="navbar-end">
           {!token && <Link to="/login" className="navbar-item">

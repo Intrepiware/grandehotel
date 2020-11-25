@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import About from './pages/About';
+import Login from './pages/Login';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                 <Nav />
                 <Switch>
                     <Route path="/about" component={About} />
+                    <Route path="/login" component={Login} />
                 </Switch>
             </Router>
         </div>

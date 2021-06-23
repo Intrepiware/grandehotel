@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GrandeHotel.Lib.Data\GrandeHotel.Lib.Data.csproj" />
     <ProjectReference Include="..\GrandeHotel.Lib.Services\GrandeHotel.Lib.Services.csproj" />
+    <ProjectReference Include="..\GrandeHotel.Models\GrandeHotel.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,17 @@ module.exports = {
                         loader: "html-loader"
                     }
                 ]
+            },
+            {      
+              test: /\.(png|svg|jpg|jpeg|gif)$/i,      
+              use: [ 'file-loader']
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },
